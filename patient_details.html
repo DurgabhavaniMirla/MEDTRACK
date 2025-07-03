@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient Details – MedTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #f3e5f5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .details-card {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .info {
+      font-size: 1rem;
+      color: #444;
+      text-align: left;
+      line-height: 1.8;
+      background: #f1f8e9;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    .info p {
+      margin-bottom: 12px;
+    }
+
+    .info strong {
+      color: #000;
+    }
+
+    .back-link {
+      margin-top: 20px;
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      color: #ba68c8;
+      border: 2px solid #ba68c8;
+      padding: 10px 20px;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background-color: #ba68c8;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="details-card">
+    <h1>My Medical Details</h1>
+    <div class="info">
+      <p><strong>Name:</strong> {{ user.name }}</p>
+      <p><strong>Age:</strong> {{ user.age }}</p>
+      <p><strong>Gender:</strong> {{ user.gender }}</p>
+      <p><strong>Conditions:</strong> {{ user.conditions or "None listed" }}</p>
+    </div>
+    <a href="/patient_dashboard" class="back-link">← Back to Dashboard</a>
+  </div>
+
+</body>
+</html>

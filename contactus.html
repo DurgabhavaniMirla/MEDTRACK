@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Us – MedTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: linear-gradient(135deg, #e1f5fe, #f3e5f5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+      animation: float 18s infinite ease-in-out, rotate 25s infinite linear;
+      pointer-events: none;
+    }
+
+    .bubble:nth-child(1) {
+      width: 200px; height: 200px; top: 10%; left: -60px; animation-delay: 0s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 100px; height: 100px; bottom: 20%; right: 40px; animation-delay: 3s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 80px; height: 80px; top: 70%; left: 20%; animation-delay: 6s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .contact-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      z-index: 1;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #333;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .btn-send {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #4dd0e1, #ba68c8);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-send:hover {
+      transform: scale(1.03);
+    }
+
+    .contact-info {
+      margin-top: 25px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .contact-info strong {
+      display: block;
+      color: #000;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Animated bubbles background -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <!-- Contact Card -->
+  <div class="contact-card">
+    <h2>Contact MedTrack</h2>
+    <form method="POST" action="/send-message">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" required></textarea>
+      </div>
+
+      <button type="submit" class="btn-send">Send Message</button>
+    </form>
+
+    <div class="contact-info">
+      <strong>Email:</strong> medtrack.support@gmail.com
+      <strong>Phone:</strong> +91 9876543210
+    </div>
+  </div>
+
+</body>
+</html>

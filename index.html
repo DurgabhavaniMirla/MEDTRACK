@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedTrack – Smarter Health Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap & Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #f4f8fb;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: white;
+      padding: 15px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #4c00b0;
+    }
+
+    .navbar-links a {
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 600;
+      color: #4c00b0;
+    }
+
+    .navbar-links a:hover {
+      color: #8b2eff;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #4c00b0, #8b2eff);
+      padding: 120px 30px 180px;
+      position: relative;
+      overflow: hidden;
+      color: white;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.2;
+      text-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: 20px auto 0;
+      font-weight: 500;
+      color: #f0eaff;
+    }
+
+    .highlight-text {
+      color: #ffdd57;
+      text-shadow: 0 0 10px rgba(255, 221, 87, 0.6);
+    }
+
+    .btn-login, .btn-signup {
+      padding: 14px 35px;
+      border-radius: 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border: none;
+      transition: 0.4s ease;
+      text-decoration: none;
+    }
+
+    .btn-login {
+      background: linear-gradient(to right, #00f2fe, #4facfe);
+      color: white;
+      box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    }
+
+    .btn-login:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+    }
+
+    .btn-signup {
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: white;
+      box-shadow: 0 4px 15px rgba(255, 117, 140, 0.4);
+    }
+
+    .btn-signup:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 117, 140, 0.6);
+    }
+
+    .custom-shape-divider-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      line-height: 0;
+      transform: rotate(180deg);
+      z-index: 1;
+    }
+
+    .custom-shape-divider-bottom svg {
+      display: block;
+      width: 100%;
+      height: 150px;
+    }
+
+    .custom-shape-divider-bottom .shape-fill {
+      fill: #f4f8fb;
+    }
+
+    .features {
+      padding: 80px 20px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .features h2 {
+      font-weight: 700;
+      margin-bottom: 50px;
+      color: #4c00b0;
+    }
+
+    .feature-card {
+      background: #f9fbfd;
+      border-radius: 20px;
+      padding: 30px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      transition: 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: #4c00b0;
+    }
+
+    .testimonials {
+      background-color: #f4f8fb;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .testimonial-box {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      margin: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .cta-section {
+      background-color: #4c00b0;
+      color: white;
+      padding: 80px 30px;
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-weight: 700;
+      font-size: 2.2rem;
+    }
+
+    .cta-section a {
+      margin-top: 20px;
+      padding: 12px 35px;
+      font-size: 1rem;
+      border-radius: 30px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9rem;
+      color: #666;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar d-flex justify-content-between align-items-center">
+    <a class="navbar-brand" href="/">MedTrack</a>
+    <div class="navbar-links">
+      <a href="/aboutus">About</a>
+      <a href="/contactus">Contact</a>
+      <a href="/login" class="btn btn-login me-2">🔓 Login</a>
+      <a href="/signup" class="btn btn-signup">📝 Sign Up</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section d-flex align-items-center justify-content-center">
+    <div class="custom-shape-divider-bottom">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M0,0V46.29c47.1,22.6,103.3,29.27,158.58,17C247.46,45.71,320,0,400,0s152.54,45.71,241.42,63.29C696.7,83.89,752.9,77.22,800,54.61c55.28-26.28,111.48-30.94,158.58-17V0Z"
+          class="shape-fill"></path>
+      </svg>
+    </div>
+    <div class="container text-center text-white">
+      <h1 class="hero-title">Smarter Health <span class="highlight-text">Starts Here</span></h1>
+      <p class="hero-subtitle">Manage your appointments, medications, and records — all in one powerful app.</p>
+      <div class="hero-buttons d-flex justify-content-center mt-4">
+        <a href="/login" class="btn btn-login me-3">🔓 Login</a>
+        <a href="/signup" class="btn btn-signup">📝 Sign Up</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features container">
+    <h2>Everything You Need in One App</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h5>Appointment Scheduling</h5>
+          <p>Book appointments instantly with top healthcare professionals.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">💊</div>
+          <h5>Medication Alerts</h5>
+          <p>Get smart reminders for your medications and never miss a dose.</p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-card">
+          <div class="feature-icon">📁</div>
+          <h5>Health Records</h5>
+          <p>Securely store and access all your health data anytime, anywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2>What Our Users Say</h2>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="testimonial-box">
+            <p>"MedTrack helped me organize my medical visits and records like never before. It's my digital health diary."</p>
+            <strong>– Anjali, Student</strong>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="testimonial-box">
+            <p>"As a diabetic, timely medication reminders are life-saving. MedTrack does it beautifully."</p>
+            <strong>– Rohit, Software Engineer</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <div class="cta-section">
+    <h2>Think Big. Track Smart.</h2>
+    <p>Join thousands managing their health with clarity, confidence, and care.</p>
+    <a href="/signup" class="btn btn-light">Get Started</a>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 MedTrack. All rights reserved.
+  </footer>
+
+</body>
+</html>

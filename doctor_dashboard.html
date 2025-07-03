@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor Dashboard – MedTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <script>
+    function toggleProfile() {
+      const section = document.getElementById('doctor-details');
+      section.style.display = section.style.display === 'none' ? 'block' : 'none';
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #e0f7fa;
+      color: #333;
+    }
+
+    .top-bar {
+      text-align: right;
+      padding: 20px;
+      background: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-button {
+      background: #4db6ac;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .profile-button:hover {
+      background: #00897b;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .welcome-header {
+      background: linear-gradient(to right, #4db6ac, #81d4fa);
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #00695c;
+      border-left: 5px solid #4db6ac;
+      padding-left: 10px;
+      margin-bottom: 20px;
+    }
+
+    .appointment-card {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .btn-submit {
+      padding: 10px 20px;
+      background: linear-gradient(to right, #4db6ac, #81d4fa);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(to right, #00897b, #4fc3f7);
+      transform: scale(1.02);
+    }
+
+    .logout-link {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .logout-link a {
+      text-decoration: none;
+      color: #d32f2f;
+      font-weight: 600;
+    }
+
+    .logout-link a:hover {
+      text-decoration: underline;
+    }
+
+    .profile-icon {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">
+    <button class="profile-button" onclick="toggleProfile()">
+      <span class="profile-icon">👨‍⚕️</span> Doctor Profile
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="welcome-header">
+      <h1>Welcome, {{ session['email'] }}</h1>
+      <p>Manage appointments and provide care to your patients.</p>
+    </div>
+
+    <div class="section hidden" id="doctor-details">
+      <div class="section-title">Doctor Details</div>
+      <div class="appointment-card">
+        <p><strong>Email:</strong> {{ session['email'] }}</p>
+        <p><strong>Specialization:</strong> {{ doctor.specialization if doctor else "N/A" }}</p>
+      </div>
+    </div>
+
+    <div class="section-title">Pending Appointments</div>
+
+    {% if appointments %}
+      {% for a in appointments %}
+        <div class="appointment-card">
+          <p><strong>Patient:</strong> {{ a[1] }}</p>
+          <p><strong>Date:</strong> {{ a[3] }}</p>
+          <p><strong>Symptoms:</strong> {{ a[4] }}</p>
+          <p><strong>Status:</strong> {{ a[5] }}</p>
+
+          {% if a[5] != 'Completed' %}
+            <form method="POST" action="/update_appointment">
+              <input type="hidden" name="appointment_id" value="{{ a[0] }}">
+              <div class="form-group">
+                <label for="prescription">Prescription</label>
+                <textarea name="prescription" required></textarea>
+              </div>
+              <button type="submit" class="btn-submit">Submit & Complete</button>
+            </form>
+          {% else %}
+            <p><strong>Prescription:</strong> {{ a[6] }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p>No appointments available.</p>
+    {% endif %}
+
+    <div class="logout-link">
+      <a href="/logout">Logout</a>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login – MedTrack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      height: 100vh;
+      background: linear-gradient(135deg, #0a192f, #112240);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Floating Bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+      animation: float 20s infinite ease-in-out, rotate 30s infinite linear;
+      pointer-events: none;
+    }
+
+    .bubble:nth-child(1) {
+      width: 250px; height: 250px; top: 10%; left: -80px; animation-delay: 0s;
+    }
+
+    .bubble:nth-child(2) {
+      width: 120px; height: 120px; bottom: 20%; right: 40px; animation-delay: 4s;
+    }
+
+    .bubble:nth-child(3) {
+      width: 90px; height: 90px; top: 60%; left: 20%; animation-delay: 6s;
+    }
+
+    .bubble:nth-child(4) {
+      width: 70px; height: 70px; top: 15%; right: 100px; animation-delay: 9s;
+    }
+
+    .bubble:nth-child(5) {
+      width: 60px; height: 60px; bottom: 15%; left: 25%; animation-delay: 12s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-30px); }
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .login-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      z-index: 1;
+      color: #fff;
+      animation: fadeIn 1s ease-out forwards;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    h2 i {
+      font-size: 1.8rem;
+      color: #ffffff;
+      animation: pulse 2.5s infinite;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: none;
+      background-color: rgba(255, 255, 255, 0.95);
+      color: #000;
+    }
+
+    .role-options {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .role-options input[type="radio"] {
+      display: none;
+    }
+
+    .role-options label {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      margin: 0 5px;
+      border: 2px solid #aaa;
+      border-radius: 10px;
+      font-weight: 600;
+      background: #fff;
+      color: #333;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .role-options input[type="radio"]:checked + label {
+      background: linear-gradient(to right, #00e5ff, #ba68c8);
+      color: #fff;
+      border-color: #ba68c8;
+    }
+
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #00e5ff, #ba68c8);
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn-login:hover {
+      transform: scale(1.03);
+    }
+
+    .signup-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .signup-link a {
+      color: #ffffff;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Bubbles -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <!-- Login Card -->
+  <div class="login-card">
+    <h2><i class="fas fa-user-doctor"></i> Login to MedTrack</h2>
+    <form method="POST" action="/login">
+      
+      <!-- Role Selection -->
+      <div class="form-group">
+        <label>Login as:</label>
+        <div class="role-options">
+          <input type="radio" name="user_type" id="patient" value="patient" required>
+          <label for="patient">Patient</label>
+          <input type="radio" name="user_type" id="doctor" value="doctor" required>
+          <label for="doctor">Doctor</label>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="username">Email or Username</label>
+        <input type="text" name="email" id="username" required>
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+      </div>
+
+      <button type="submit" class="btn-login">Login</button>
+    </form>
+
+    <div class="signup-link">
+      Don’t have an account? <a href="/signup">Sign up here</a>
+    </div>
+  </div>
+
+</body>
+</html>
