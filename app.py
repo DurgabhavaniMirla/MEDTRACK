@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key_here'
 
 # AWS Config
-dynamodb = boto3.resource('dynamodb', region_name='ap-south-1')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1')
 sns = boto3.client('sns', region_name='ap-south-1')
 
 # Replace with your actual table names and SNS ARN
