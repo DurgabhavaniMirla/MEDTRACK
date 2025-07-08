@@ -1,196 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Doctor Dashboard – MedTrack</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-  <script>
-    function toggleProfile() {
-      const section = document.getElementById('doctor-details');
-      section.style.display = section.style.display === 'none' ? 'block' : 'none';
-    }
-  </script>
-  <style>
-    body {
-      font-family: 'Outfit', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #e0f7fa;
-      color: #333;
-    }
-
-    .top-bar {
-      text-align: right;
-      padding: 20px;
-      background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .profile-button {
-      background: #4db6ac;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: background 0.3s ease;
-    }
-
-    .profile-button:hover {
-      background: #00897b;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .welcome-header {
-      background: linear-gradient(to right, #4db6ac, #81d4fa);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      color: white;
-      margin-bottom: 40px;
-    }
-
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #00695c;
-      border-left: 5px solid #4db6ac;
-      padding-left: 10px;
-      margin-bottom: 20px;
-    }
-
-    .appointment-card {
-      background: #ffffff;
-      border: 1px solid #ddd;
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .btn-submit {
-      padding: 10px 20px;
-      background: linear-gradient(to right, #4db6ac, #81d4fa);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-submit:hover {
-      background: linear-gradient(to right, #00897b, #4fc3f7);
-      transform: scale(1.02);
-    }
-
-    .logout-link {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .logout-link a {
-      text-decoration: none;
-      color: #d32f2f;
-      font-weight: 600;
-    }
-
-    .logout-link a:hover {
-      text-decoration: underline;
-    }
-
-    .profile-icon {
-      font-size: 1.2rem;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Doctor Dashboard - MedTrack</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to bottom right, #e1f5fe, #ffffff);
+            margin: 0;
+            padding: 20px;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .top-bar h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+        .logout-button {
+            background-color: #e53935;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .dashboard-container {
+            max-width: 1000px;
+            margin: auto;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h3 {
+            color: #00695c;
+            border-left: 5px solid #4dd0e1;
+            padding-left: 10px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+        .card p {
+            margin: 6px 0;
+            color: #34495e;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+        button {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .prescription-box {
+            background-color: #f1f8e9;
+            padding: 10px;
+            border-radius: 6px;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="top-bar">
-    <button class="profile-button" onclick="toggleProfile()">
-      <span class="profile-icon">👨‍⚕️</span> Doctor Profile
-    </button>
-  </div>
-
-  <div class="container">
-    <div class="welcome-header">
-      <h1>Welcome, {{ session['email'] }}</h1>
-      <p>Manage appointments and provide care to your patients.</p>
-    </div>
-
-    <div class="section hidden" id="doctor-details">
-      <div class="section-title">Doctor Details</div>
-      <div class="appointment-card">
-        <p><strong>Email:</strong> {{ session['email'] }}</p>
-        <p><strong>Specialization:</strong> {{ doctor.specialization if doctor else "N/A" }}</p>
-      </div>
-    </div>
-
-    <div class="section-title">Pending Appointments</div>
-
-    {% if appointments %}
-      {% for a in appointments %}
-        <div class="appointment-card">
-          <p><strong>Patient:</strong> {{ a[1] }}</p>
-          <p><strong>Date:</strong> {{ a[3] }}</p>
-          <p><strong>Symptoms:</strong> {{ a[4] }}</p>
-          <p><strong>Status:</strong> {{ a[5] }}</p>
-
-          {% if a[5] != 'Completed' %}
-            <form method="POST" action="/update_appointment">
-              <input type="hidden" name="appointment_id" value="{{ a[0] }}">
-              <div class="form-group">
-                <label for="prescription">Prescription</label>
-                <textarea name="prescription" required></textarea>
-              </div>
-              <button type="submit" class="btn-submit">Submit & Complete</button>
-            </form>
-          {% else %}
-            <p><strong>Prescription:</strong> {{ a[6] }}</p>
-          {% endif %}
+    <div class="dashboard-container">
+        <div class="top-bar">
+            <h2>Welcome, Dr. {{ name }} {% for doc in users if doc.email == session['email'] %} ({{ doc.specialization }}) {% endfor %}</h2>
+            <a href="/logout"><button class="logout-button">Logout</button></a>
         </div>
-      {% endfor %}
-    {% else %}
-      <p>No appointments available.</p>
-    {% endif %}
 
-    <div class="logout-link">
-      <a href="/logout">Logout</a>
+        <!-- Pending Appointments -->
+        <div class="section">
+            <h3>🕒 Pending Appointments</h3>
+            {% for appt in appointments if appt[5] != 'Completed' %}
+            <div class="card">
+                <p><strong>Patient Email:</strong> {{ appt[1] }}</p>
+                <p><strong>Appointment Date:</strong> {{ appt[3] }}</p>
+                <p><strong>Symptoms:</strong> {{ appt[4] }}</p>
+                <p><strong>Status:</strong> {{ appt[5] }}</p>
+
+                <form method="POST" action="/doctor_dashboard">
+                    <input type="hidden" name="appointment_id" value="{{ appt[0] }}">
+                    <label><strong>Write Prescription:</strong></label>
+                    <textarea name="prescription" placeholder="Write your prescription here..." required></textarea>
+                    <button type="submit">Submit Prescription</button>
+                </form>
+            </div>
+            {% else %}
+            <p style="color:#777;">No pending appointments.</p>
+            {% endfor %}
+        </div>
+
+        <!-- Completed Appointments -->
+        <div class="section">
+            <h3>✅ Completed Appointments</h3>
+            {% for appt in appointments if appt[5] == 'Completed' %}
+            <div class="card">
+                <p><strong>Patient Email:</strong> {{ appt[1] }}</p>
+                <p><strong>Appointment Date:</strong> {{ appt[3] }}</p>
+                <p><strong>Symptoms:</strong> {{ appt[4] }}</p>
+                <p><strong>Status:</strong> {{ appt[5] }}</p>
+                <p><strong>Prescription:</strong></p>
+                <div class="prescription-box">{{ appt[6] }}</div>
+            </div>
+            {% else %}
+            <p style="color:#777;">No completed appointments.</p>
+            {% endfor %}
+        </div>
     </div>
-  </div>
-
 </body>
 </html>
