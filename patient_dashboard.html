@@ -6,180 +6,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Outfit', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #e0f7fa;
-      color: #333;
-    }
-    .top-bar {
-      text-align: right;
-      padding: 20px;
-      background: #ffffff;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .profile-button {
-      background: #ba68c8;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .container {
-      max-width: 1100px;
-      margin: 20px auto;
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-    .welcome-header {
-      background: linear-gradient(to right, #80deea, #ce93d8);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: center;
-      color: white;
-      margin-bottom: 40px;
-    }
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #00695c;
-      border-left: 5px solid #80deea;
-      padding-left: 10px;
-      margin-bottom: 20px;
-    }
-    .details-box {
-      background: #f1f8e9;
-      padding: 20px;
-      border-radius: 12px;
-      line-height: 1.8;
-    }
-    .flex-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
-    }
-    .flex-col {
-      flex: 1;
-      min-width: 300px;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    label {
-      font-weight: 600;
-      display: block;
-      margin-bottom: 6px;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(to right, #80deea, #ba68c8);
-      color: white;
-      border: none;
-      border-radius: 30px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    .btn-submit:hover {
-      background: linear-gradient(to right, #4dd0e1, #ab47bc);
-      transform: scale(1.02);
-    }
-    .appointment-card {
-      background: #fefefe;
-      border: 1px solid #ccc;
-      padding: 15px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-    }
-    .logout-link {
-      text-align: center;
-      margin-top: 30px;
-    }
-    .logout-link a {
-      text-decoration: none;
-      color: #d32f2f;
-      font-weight: 600;
-    }
+    body { font-family: 'Outfit', sans-serif; background: #e0f7fa; color: #333; margin:0; padding:0; }
+    .container { max-width:1100px; margin:20px auto; padding:20px; background:#fff; border-radius:20px; box-shadow:0 8px 30px rgba(0,0,0,0.1); }
+    h1, h2 { text-align: center; margin-bottom: 20px; }
+    h2 { color: #00695c; border-left:5px solid #80deea; padding-left:10px; text-align:left; }
+    .doctor-list { list-style: none; padding-left: 0; margin-bottom: 30px; }
+    .doctor-list li { background: #f1f8e9; margin: 5px 0; padding: 8px 12px; border-radius: 6px; }
+    form { margin-bottom: 40px; }
+    label { display:block; margin:10px 0 4px; font-weight:600; }
+    input, textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #ccc; font-size:1rem; }
+    .btn-submit { width:100%; padding:14px; background:linear-gradient(to right,#80deea,#ba68c8); color:#fff; border:none; border-radius:30px; font-weight:600; cursor:pointer; margin-top:10px; }
+    .appointment-card { background:#fefefe; border:1px solid #ccc; padding:15px; border-radius:10px; margin-bottom:15px; }
+    .logout-link { text-align:center; margin-top:30px; }
+    .logout-link a { text-decoration:none; color:#d32f2f; font-weight:600; }
   </style>
+  <script>
+    function toggleProfile() {
+      const box = document.getElementById('patient-details');
+      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>
 </head>
 <body>
-
-  <div class="top-bar">
-    <button class="profile-button" onclick="document.getElementById('patient-details').classList.toggle('hidden')">
-      View Profile
-    </button>
-  </div>
-
   <div class="container">
-    <div class="welcome-header">
-      <h1>👋 Hello, {{ session['name'] }}!</h1>
-      <p>Welcome to your MedTrack dashboard. Book appointments and track your health history.</p>
-    </div>
+    <h1>👋 Hello, {{ session['name'] }}!</h1>
+    <p style="text-align:center; margin-bottom:40px;">
+      Welcome to your MedTrack dashboard. Below are the doctors you can book with:
+    </p>
 
-    <div id="patient-details" class="details-box hidden">
-      <p><strong>Email:</strong> {{ session['email'] }}</p>
-      <p><strong>Gender:</strong> {{ user.gender if user else 'N/A' }}</p>
-      <p><strong>Age:</strong> {{ user.age if user else 'N/A' }}</p>
-    </div>
+    <!-- Registered Doctors Section -->
+    <h2>Registered Doctors</h2>
+    <ul class="doctor-list">
+      {% if doctors %}
+        {% for doc in doctors %}
+          <li>{{ doc.email }} — {{ doc.specialization }}</li>
+        {% endfor %}
+      {% else %}
+        <li style="color:#777;">No doctors registered yet.</li>
+      {% endif %}
+    </ul>
 
-    <div class="flex-row">
-      <!-- Booking -->
-      <div class="flex-col">
-        <div class="section-title">Book an Appointment</div>
-        <form method="POST" action="/patient_dashboard">
-          <div class="form-group">
-            <label for="doctor_email">Doctor Email</label>
-            <input type="email" id="doctor_email" name="doctor_email" required>
-          </div>
-          <div class="form-group">
-            <label for="date">Appointment Date</label>
-            <input type="date" id="date" name="date" required>
-          </div>
-          <div class="form-group">
-            <label for="symptoms">Symptoms</label>
-            <textarea id="symptoms" name="symptoms" required></textarea>
-          </div>
-          <button type="submit" class="btn-submit">Book Appointment</button>
-        </form>
-      </div>
+    <!-- Booking Form -->
+    <h2>Book an Appointment</h2>
+    <form method="POST" action="/patient_dashboard">
+      <label for="doctor_email">Doctor Email (choose from above)</label>
+      <input type="email" id="doctor_email" name="doctor_email" required list="doctor-list">
+      <datalist id="doctor-list">
+        {% for doctor in doctors %}
+          <option value="{{ doctor.email }}">{{ doctor.email }} — {{ doctor.specialization }}</option>
+        {% endfor %}
+      </datalist>
 
-      <!-- Appointment History -->
-      <div class="flex-col">
-        <div class="section-title">Appointment History</div>
-        {% if appointments %}
-          {% for appt in appointments %}
-            <div class="appointment-card">
-              <p><strong>Doctor:</strong> {{ appt[2] }}</p>
-              <p><strong>Date:</strong> {{ appt[3] }}</p>
-              <p><strong>Symptoms:</strong> {{ appt[4] }}</p>
-              <p><strong>Status:</strong> {{ appt[5] }}</p>
-              <p><strong>Prescription:</strong> {{ appt[6] if appt[6] else "Pending" }}</p>
-            </div>
-          {% endfor %}
-        {% else %}
-          <p>No previous appointments found.</p>
-        {% endif %}
-      </div>
-    </div>
+      <label for="date">Appointment Date</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="symptoms">Symptoms</label>
+      <textarea id="symptoms" name="symptoms" required></textarea>
+
+      <button type="submit" class="btn-submit">Book Appointment</button>
+    </form>
+
+    <!-- Appointment History -->
+    <h2>Your Appointment History</h2>
+    {% if appointments %}
+      {% for appt in appointments %}
+        <div class="appointment-card">
+          <p><strong>Doctor:</strong> {{ appt[2] }}</p>
+          <p><strong>Date:</strong> {{ appt[3] }}</p>
+          <p><strong>Status:</strong> {{ appt[5] }}</p>
+          <p><strong>Prescription:</strong> {{ appt[6] or 'Pending' }}</p>
+        </div>
+      {% endfor %}
+    {% else %}
+      <p style="text-align:center; color:#777;">You have no appointments yet.</p>
+    {% endif %}
 
     <div class="logout-link">
       <a href="/logout">Logout</a>
     </div>
   </div>
-
 </body>
 </html>
